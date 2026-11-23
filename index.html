@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Нажми на ❤️</title>
+  <style>
+    body { background:#0f0f13; color:#fff; font-family:sans-serif; height:100dvh; margin:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; }
+    .hint { font-size:22px; font-weight:600; }
+    #heart-btn { font-size:96px; background:none; border:none; cursor:pointer; }
+    #player { display:none; position:fixed; inset:0; width:100vw; height:100vh; background:#000; z-index:9999; }
+  </style>
+</head>
+<body>
+  <div class="hint">Нажми на ❤️</div>
+  <button id="heart-btn">❤️</button>
+  <video id="player" src="11442.mp4" playsinline controls></video>
+  <script>
+    const btn = document.getElementById("heart-btn");
+    const hint = document.querySelector(".hint");
+    const video = document.getElementById("player");
+    btn.onclick = async () => {
+      btn.style.display = "none";
+      hint.style.display = "none";
+      video.style.display = "block";
+      video.muted = false;
+      try { await video.play(); } catch (e) {}
+      const fs = video.requestFullscreen || video.webkitRequestFullscreen;
+      if (fs) { try { await fs.call(video); } catch (e) {} }
+    };
+  </script>
+</body>
+  </html>
+  
